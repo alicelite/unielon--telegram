@@ -1,17 +1,8 @@
-import unielonLogo from '/unielon.svg'
-import './App.css'
-
+import AppRoutes from "./routes/router";
+import "./assets/style/var.less"
 function App() {
   return (
-    <>
-      <div>
-        <a href="https://unielon.com/" target="_blank">
-          <img src={unielonLogo} className="logo" alt="Unielon logo" />
-        </a>
-      </div>
-      <h3>Unielon Telegram</h3>
-    </>
-  )
+    <AppRoutes />
+  );
 }
-
-export default App
+export default App;
