@@ -1,8 +1,10 @@
-import AppRoutes from "./routes/router";
 import "./assets/style/var.less"
+import WelcomeScreen from "./pages/main/WelcomeScreen";
 function App() {
   return (
-    <AppRoutes />
+    <>
+    <WelcomeScreen />
+    </>
   );
 }
 export default App;
