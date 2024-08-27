@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 
-import { fontSizes } from '../../ui/theme/font';
+import { fontSizes } from '@/ui/theme/font';
 
 interface ImageProps {
   src?: string;

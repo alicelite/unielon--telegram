@@ -1,4 +1,4 @@
-import { fontSizes } from '../../ui/theme/font';
+import { fontSizes } from '@/ui/theme/font';
 
 import { Card } from '../Card';
 import { Image } from '../Image';

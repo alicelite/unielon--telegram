@@ -1,55 +1,25 @@
 import React, { CSSProperties } from 'react';
-
 import { ColorTypes, colors } from '../../ui/theme/colors';
-import { fontSizes } from '../../ui/theme/font';
+import { fontSizes } from '@/ui/theme/font';
+import dogeIcon from "@/assets/images/wallet-logo.png";
+import successIcon from "@/assets/images/success.svg";
+import { BiTransfer } from "react-icons/bi";
+import { FaQrcode } from "react-icons/fa";
+import { AiOutlineHistory } from "react-icons/ai";
+import { IoIosCopy } from "react-icons/io";
+import { PiEyeSlashLight } from "react-icons/pi";
+import { AiOutlineEye } from "react-icons/ai";
 
 export const svgRegistry = {
-  history: './images/icons/clock-solid.svg',
-  merge: './images/icons/bx-merge.svg',
-  pending: './images/icons/transfer-pending.svg',
-  refresh: './images/icons/refresh.svg',
-  search: './images/icons/search.svg',
-  send: './images/icons/arrow-left-right.svg',
-  swap: './images/icons/swap-fill.svg',
-  receive: './images/icons/qrcode.svg',
-  trade: './images/icons/trade1.svg',
-  add: './images/icons/addition.svg',
-  'right-arrow': './images/icons/arrow-up-right.svg',
-  right: './images/icons/arrow-right.svg',
-  left: './images/icons/arrow-left.svg',
-  down: './images/icons/down.svg',
-
-  discord: './images/icons/discord.svg',
-  twitter: './images/icons/twitter.svg',
-  // github: './images/icons/github.svg',
-
-  doge: './images/icons/wallet-logo.png',
-  qrcode: './images/icons/qrcode.svg',
-
-  user: '/images/icons/user-solid.svg',
-  wallet: '/images/icons/wallet-solid.svg',
-  // compass: './images/icons/compass-solid.svg',
-  settings: './images/icons/gear-solid.svg',
-  grid: './images/icons/grid-solid.svg',
-
-  delete: '/images/icons/delete.svg',
-  success: '/images/icons/success.svg',
-  check: '/images/icons/check.svg',
-  eye: '/images/icons/eye.svg',
-  'eye-slash': '../../../assets/images/eye-slash.svg',
-  copy: './images/icons/copy-solid.svg',
-  transfer: './images/icons/transfer.svg',
-  close: './images/icons/xmark.svg',
-
-  'circle-check': '/images/icons/circle-check.svg',
-  pencil: '/images/icons/pencil.svg',
-  'circle-info': '/images/icons/circle-info.svg',
-  'circle-question': '/images/icons/circle-question.svg'
+  doge: dogeIcon,
+  success: successIcon,
+  delete: '/images/icons/delete.svg'
 };
 
 const iconImgList: Array<IconTypes> = ['success', 'delete', 'doge'];
 
-export type IconTypes = keyof typeof svgRegistry;
+export type IconTypes = keyof typeof svgRegistry | 'send' | 'receive' | 'history' | 'copy' | 'eye' | 'eye-slash';
+
 interface IconProps {
   /**
    * The name of the icon
@@ -83,6 +53,15 @@ interface IconProps {
   children?: React.ReactNode;
 }
 
+const iconComponents: { [key in IconTypes]?: React.ComponentType<{ color?: string }> } = {
+  send: BiTransfer,
+  receive: FaQrcode,
+  history: AiOutlineHistory,
+  copy: IoIosCopy,
+  eye: AiOutlineEye,
+  "eye-slash": PiEyeSlashLight
+};
+
 export function Icon(props: IconProps) {
   const {
     icon,
@@ -93,6 +72,7 @@ export function Icon(props: IconProps) {
     onClick,
     children
   } = props;
+
   if (!icon) {
     return (
       <div
@@ -101,7 +81,7 @@ export function Icon(props: IconProps) {
           {},
           {
             color: color ? colors[color] : '#FFF',
-            fontSizes: size || fontSizes.icon,
+            fontSize: size || fontSizes.icon,
             display: 'flex'
           } as CSSProperties,
           $containerStyleOverride,
@@ -113,7 +93,17 @@ export function Icon(props: IconProps) {
       </div>
     );
   }
-  const iconPath = svgRegistry[icon as IconTypes];
+
+  const IconComponent = iconComponents[icon as IconTypes];
+  if (IconComponent) {
+    return (
+      <div onClick={onClick}>
+        <IconComponent color={color ? colors[color] : 'white'} />
+      </div>
+    )
+  }
+
+  const iconPath = svgRegistry[icon as keyof typeof svgRegistry];
   if (iconImgList.includes(icon)) {
     return (
       <img
@@ -126,6 +116,7 @@ export function Icon(props: IconProps) {
       />
     );
   }
+
   if (iconPath) {
     return (
       <div style={$containerStyleOverride}>

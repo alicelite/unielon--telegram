@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 
 import { colors, ColorTypes } from '../../ui/theme/colors';
-import { typography } from '../../ui/theme/typography';
+import { typography } from '@/ui/theme/typography';
 
 import { BaseView, BaseViewProps } from '../BaseView';
 

@@ -1,8 +1,8 @@
 import { CSSProperties } from 'react';
 
-import { colors } from '../../../ui/theme/colors';
-import { fontSizes } from '../../../ui/theme/font';
-import { spacing } from '../../../ui/theme/spacing';
+import { colors } from '@/ui/theme/colors';
+import { fontSizes } from '@/ui/theme/font';
+import { spacing } from '@/ui/theme/spacing';
 import { LoadingOutlined } from '@ant-design/icons';
 
 import { Text } from '../../Text';

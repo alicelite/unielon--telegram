@@ -2,7 +2,7 @@ import { AppState } from '..';
 import { useAppSelector } from '../hooks';
 
 export function useUIState(): AppState['ui'] {
-  return useAppSelector((state: { ui: any; }) => state.ui);
+  return useAppSelector((state) => state.ui);
 }
 
 export function useWalletTabScreenState() {

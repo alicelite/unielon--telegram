@@ -1,7 +1,11 @@
 /* eslint-disable quotes */
-import { Button, Column, Content, Layout, Row, Text, Logo } from '../../components';
-
+import { Button, Column, Content, Layout, Row, Text, Logo } from '@/components';
+import { NavigateOptions, useNavigate } from "react-router-dom"
+import { useGlobalState } from '../../Context';
 const WelcomeScreen = () => {
+  const navigate = useNavigate()
+  const { state } = useGlobalState();
+  const { isBooted } = state;
   return (
     <Layout>
       <Content justifyContent>
@@ -17,18 +21,26 @@ const WelcomeScreen = () => {
               preset="sub"
               textCenter
             />
-
             <Button
               text="Create new wallet"
               preset="primary"
               onClick={async () => {
-                // navigate('account/create-password')
+                if (isBooted) {
+                  navigate('/account/create-hd-wallet', { state: { isImport: false } } as NavigateOptions);
+                } else {
+                  navigate('/account/create-password', { state: { isNewAccount: true } } as NavigateOptions & { isNewAccount: boolean });
+                }
               }}
             />
             <Button
               text="I already have a wallet"
               preset="default_"
               onClick={async () => {
+                if (isBooted) {
+                  navigate('/account/create-hd-wallet', { state: { isImport: true } } as NavigateOptions);
+                } else {
+                  navigate('/account/create-password', { state: { isNewAccount: false } } as NavigateOptions);
+                }
               }}
             />
           </Column>

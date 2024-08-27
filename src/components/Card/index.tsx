@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 
-import { colors } from '../../ui/theme/colors';
-import { spacingGap } from '../../ui/theme/spacing';
+import { colors } from '@/ui/theme/colors';
+import { spacingGap } from '@/ui/theme/spacing';
 
 import { BaseView, BaseViewProps } from '../BaseView';
 

@@ -1,4 +1,4 @@
-import { copyToClipboard, shortAddress } from '../../ui/utils';
+import { copyToClipboard, shortAddress } from '@/ui/utils';
 
 import { useTools } from '../ActionComponent';
 import { Icon } from '../Icon';

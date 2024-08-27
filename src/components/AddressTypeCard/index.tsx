@@ -1,7 +1,7 @@
 import { ReactEventHandler } from 'react';
 
 import { AddressAssets } from '../../shared/types';
-import { fontSizes } from '../../ui/theme/font';
+import { fontSizes } from '@/ui/theme/font';
 
 import { Card } from '../Card';
 import { Column } from '../Column';
@@ -18,7 +18,7 @@ interface AddressTypeCardProps {
   onClick?: ReactEventHandler<HTMLDivElement>;
 }
 export function AddressTypeCard(props: AddressTypeCardProps) {
-  const { onClick, label, address, checked, assets } = props;
+  const { onClick, label, address, assets } = props;
   const hasVault = Boolean(assets.satoshis && assets.satoshis > 0);
   return (
     <Card px="zero" py="zero" gap="zero" rounded onClick={onClick}>
@@ -30,7 +30,7 @@ export function AddressTypeCard(props: AddressTypeCardProps) {
         </Row>
         <Row justifyBetween px="md" pb="md">
           <CopyableAddress address={address} />
-          <Column justifyCenter>{checked && <Icon icon="check" />}</Column>
+          {/* <Column justifyCenter>{checked && <Icon icon="check" />}</Column> */}
         </Row>
         {hasVault && (
           <Row justifyBetween bg="bg3" roundedBottom px="md" py="md">

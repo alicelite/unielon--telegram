@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { useEffect, useState } from 'react';
 
-import { colors } from '../../ui/theme/colors';
+import { colors } from '@/ui/theme/colors';
 
 import { Column } from '../Column';
 import { Row } from '../Row';

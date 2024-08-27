@@ -1,17 +1,12 @@
 import { useMemo } from 'react';
 
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { Column } from '../Column';
-import { Icon } from '../Icon';
 import { Logo } from '../Logo';
 import { Row } from '../Row';
 import { Text } from '../Text';
 import './index.module.less';
 
 interface HeaderProps {
-  onBack?: () => void;
   title?: string;
   LeftComponent?: React.ReactNode;
   RightComponent?: React.ReactNode;
@@ -19,7 +14,7 @@ interface HeaderProps {
 }
 
 export function Header(props: HeaderProps) {
-  const { onBack, title, LeftComponent, RightComponent, children } = props;
+  const { title, LeftComponent, RightComponent, children } = props;
 
   const CenterComponent = useMemo(() => {
     if (children) {
@@ -36,26 +31,13 @@ export function Header(props: HeaderProps) {
         justifyBetween
         itemsCenter
         style={{
-          height: '67.5px',
+          height: '120px',
           padding: 15
         }}
       >
         <Row full>
           <Column selfItemsCenter>
             {LeftComponent}
-            {onBack && (
-              <Row
-                onClick={() => {
-                  onBack();
-                }}
-              >
-                <Icon>
-                  <FontAwesomeIcon icon={faArrowLeft} />
-                </Icon>
-
-                <Text text="Back" preset="regular-bold" />
-              </Row>
-            )}
           </Column>
         </Row>
 

@@ -1,3 +1,4 @@
+import BigNumber from 'bignumber.js';
 export const copyToClipboard = (textToCopy: string | number) => {
   if (navigator.clipboard && window.isSecureContext) {
     return navigator.clipboard.writeText(textToCopy.toString());
@@ -22,4 +23,48 @@ export function shortAddress(address?: string, len = 5) {
   if (!address) return '';
   if (address.length <= len * 2) return address;
   return address.slice(0, len) + '...' + address.slice(address.length - len);
+}
+
+export const setLocalValue = (keyValues: any) => {
+  Object.keys(keyValues).forEach((key) => {
+    localStorage.setItem(key, JSON.stringify(keyValues[key]));
+  });
+  return Promise.resolve();
+};
+
+export const getLocalValue = (key: string) => {
+  const value = JSON.parse(localStorage.getItem(key) as string);
+  return Promise.resolve(value)
+};
+
+export const setSessionValue = (keyValues: any) => {
+  Object.keys(keyValues).forEach((key) => {
+    sessionStorage.setItem(key, JSON.stringify(keyValues[key]));
+  });
+  return Promise.resolve();
+};
+
+export const getSessionValue = (key: any) => {
+  const value = JSON.parse(sessionStorage.getItem(key) as string);
+  return Promise.resolve(value);
+};
+
+export function satoshisToAmount(val: any) {
+  const num = new BigNumber(val);
+  return num.dividedBy(100000000).toFixed(8);
+}
+
+export function amountToSaothis(val: any) {
+  const num = new BigNumber(val);
+  return num.multipliedBy(100000000).toNumber();
+}
+
+export function satoshisToDOGE(val: any): BigNumber {
+  const num = new BigNumber(val);
+  return num.dividedBy(100000000);
+}
+
+export function isValidAddress(address: string) {
+  if (!address) return false;
+  return true;
 }

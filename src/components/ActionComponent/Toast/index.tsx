@@ -1,6 +1,6 @@
 import { CSSProperties, useEffect } from 'react';
 
-import { colors } from '../../../ui/theme/colors';
+import { colors } from '@/ui/theme/colors';
 import { Text } from '../../Text';
 import './index.less';
 

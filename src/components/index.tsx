@@ -12,9 +12,18 @@ import { Row } from './Row';
 import { Text } from './Text';
 import { Grid } from './Grid';
 import { TabBar } from './TabBar';
+import { Footer } from './Footer';
+import { AddressBar } from './AddressBar';
 import { FooterButtonContainer } from './FooterButtonContainer';
+import { FeeRateBar } from './FeeRateBar';
+import { AddressText } from './AddressText';
+import { AccordingInscription } from './AccordingInscription';
+import { AddressDetailPopover } from './AddressDetailPopover';
+import { RefreshButton } from './RefreshButton';
+
 export {
   Button,
+  Footer,
   Layout,
   Content,
   Icon,
@@ -28,5 +37,11 @@ export {
   Image,
   Grid,
   TabBar,
-  FooterButtonContainer
+  AddressBar,
+  FooterButtonContainer,
+  FeeRateBar,
+  AddressText,
+  AccordingInscription,
+  AddressDetailPopover,
+  RefreshButton
 };

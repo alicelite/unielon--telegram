@@ -1,7 +1,7 @@
 import React, { CSSProperties, useState } from 'react';
 
-import { colors } from '../../ui/theme/colors';
-import { spacing } from '../../ui/theme/spacing';
+import { colors } from '@/ui/theme/colors';
+import { spacing } from '@/ui/theme/spacing';
 
 import { Column } from '../Column';
 import { Icon, IconTypes } from '../Icon';

@@ -1,14 +1,13 @@
 import React, { CSSProperties, useEffect, useState } from 'react';
 
-import { SATS_DOMAIN, UNIELON_DOMAIN } from '../../shared/constant';
-import { colors } from '../../ui/theme/colors';
-import { spacing } from '../../ui/theme/spacing';
+import { colors } from '@/ui/theme/colors';
+import { spacing } from '@/ui/theme/spacing';
 
 import { Icon } from '../Icon';
 import { $textPresets, Text } from '../Text';
 import './index.less';
-import { Inscription } from '../../shared/types';
-
+import { network } from '../../ui/utils/wallet';
+import * as bitcoin from 'bitcoinjs-lib';
 export interface InputProps {
   preset?: Presets;
   placeholder?: string;
@@ -24,7 +23,7 @@ export interface InputProps {
   style?: CSSProperties;
   containerStyle?: CSSProperties;
   addressInputData?: { address: string; domain: string };
-  onAddressInputChange?: (params: { address: string; domain: string; inscription?: Inscription }) => void;
+  onAddressInputChange?: (params: { address: string; domain: string; }) => void;
   disabled?: boolean;
 }
 
@@ -59,17 +58,7 @@ const $baseInputStyle: CSSProperties = Object.assign({}, $textPresets.regular, {
   alignSelf: 'stretch'
 });
 
-const DOGECOIN_NETWORK = {
-  messagePrefix: '\x19Dogecoin Signed Message:\n',
-  bech32: 'D',
-  bip32: {
-    public: 0x02facafd,
-    private: 0x02fac398
-  },
-  pubKeyHash: 0x1e,
-  scriptHash: 0x16,
-  wif: 0x9e
-};
+
 function PasswordInput(props: InputProps) {
   const { placeholder, style: $inputStyleOverride, ...rest } = props;
   const [type, setType] = useState<'password' | 'text'>('password');
@@ -112,13 +101,10 @@ export const AddressInput = (props: InputProps) => {
 
   const [inputVal, setInputVal] = useState(addressInputData.domain || addressInputData.address);
 
-  const [inscription] = useState<Inscription>();
-
   useEffect(() => {
     onAddressInputChange({
       address: validAddress,
       domain: parseAddress ? inputVal : '',
-      inscription
     });
   }, [validAddress]);
 
@@ -139,23 +125,16 @@ export const AddressInput = (props: InputProps) => {
     if (validAddress) {
       setValidAddress('');
     }
-
-    const teststr = inputAddress.toLowerCase();
-    if (teststr.endsWith(SATS_DOMAIN) || teststr.endsWith(UNIELON_DOMAIN)) {
-     console.log(teststr, 'teststr===')
-    } else {
-      try {
-        const bitcoin = require('bitcoinjs-lib')
-        const isValid = bitcoin.address.toOutputScript(inputAddress, DOGECOIN_NETWORK)
-        if (!isValid) {
-          setFormatError('Recipient address is invalid')
-          return;
-        }
-        setValidAddress(inputAddress)
-      } catch(err) {
+    try {
+      // const bitcoin = require('bitcoinjs-lib')
+      const isValid = bitcoin.address.toOutputScript(inputAddress, network)
+      if (!isValid) {
         setFormatError('Recipient address is invalid')
-        console.log(err)
+        return;
       }
+      setValidAddress(inputAddress)
+    } catch(err) {
+      setFormatError('Recipient address is invalid')
     }
   };
 
