@@ -18,7 +18,7 @@ if (!vp.isExpanded) {
     vp.expand();
 }
 const [miniApp] = initMiniApp();
-miniApp.switchInlineQuery('Show me something', ['users', 'groups']);
+miniApp.setHeaderColor('#1c1919');
 const generateRoutes = (routes: any[]) => {
   return routes.map((route) => {
     const { path, element: Element, children } = route;
