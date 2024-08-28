@@ -1,6 +1,7 @@
 import { useIntegration } from '@telegram-apps/react-router-integration';
 import { initNavigator } from '@telegram-apps/sdk-react';
 import { useEffect, useMemo, useState } from 'react';
+import { initViewport } from '@telegram-apps/sdk';
 import {
   Route,
   Router,
@@ -10,6 +11,12 @@ import {
 import routesConfig from './routes/index';
 import "./assets/style/var.less";
 import React from "react";
+const [viewport] = initViewport();
+const vp = await viewport;
+
+if (!vp.isExpanded) {
+    vp.expand();
+}
 const generateRoutes = (routes: any[]) => {
   return routes.map((route) => {
     const { path, element: Element, children } = route;
