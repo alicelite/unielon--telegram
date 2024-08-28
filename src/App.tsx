@@ -1,7 +1,7 @@
 import { useIntegration } from '@telegram-apps/react-router-integration';
 import { initNavigator } from '@telegram-apps/sdk-react';
 import { useEffect, useMemo, useState } from 'react';
-import { initViewport } from '@telegram-apps/sdk';
+import { initViewport, initMiniApp } from '@telegram-apps/sdk';
 import {
   Route,
   Router,
@@ -17,6 +17,8 @@ const vp = await viewport;
 if (!vp.isExpanded) {
     vp.expand();
 }
+const [miniApp] = initMiniApp();
+miniApp.switchInlineQuery('Show me something', ['users', 'groups']);
 const generateRoutes = (routes: any[]) => {
   return routes.map((route) => {
     const { path, element: Element, children } = route;
